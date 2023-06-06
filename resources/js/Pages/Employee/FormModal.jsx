@@ -13,7 +13,7 @@ export default function FormModal(props) {
     const { data, setData, post, put, processing, errors, reset, clearErrors } =
         useForm({
             name: "",
-            divison_id: "",
+            division_id: "",
             position_id: "",
             nip: "",
             password: "",
@@ -66,7 +66,7 @@ export default function FormModal(props) {
         if (isEmpty(employee) === false) {
             setData({
                 name: employee.name,
-                divison_id: employee.divison_id,
+                division_id: employee.division_id,
                 position_id: employee.position_id,
                 nip: employee.nip,
                 password: employee.password,
@@ -114,9 +114,9 @@ export default function FormModal(props) {
                 <div className="flex-auto px-2">
                     <SelectedInputDevision
                         label="Divisi"
-                        itemSelected={data.divison_id}
-                        onItemSelected={(id) => setData("divison_id", id)}
-                        error={errors.divison_id}
+                        itemSelected={data.division_id}
+                        onItemSelected={(id) => setData("division_id", id)}
+                        error={errors.division_id}
                     />
                 </div>
                 <div className="flex-auto px-2">

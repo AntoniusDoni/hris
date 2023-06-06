@@ -55,7 +55,7 @@ export default function Index(props) {
     const canCreate = hasPermission(auth, 'create-employee')
     const canUpdate = hasPermission(auth, 'update-employee')
     const canDelete = hasPermission(auth, 'delete-employee')
-
+    
     return (
         <AuthenticatedLayout
             auth={props.auth}
@@ -110,7 +110,7 @@ export default function Index(props) {
                                                     {employee.name}
                                                 </td>
                                                 <td scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                    {employee?.divisi?.name}
+                                                    {employee?.division?.name}
                                                 </td>
                                                 <td scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                     {employee?.position?.name}
