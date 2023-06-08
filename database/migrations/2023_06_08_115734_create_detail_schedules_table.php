@@ -11,18 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('leaves', function (Blueprint $table) {
+        Schema::create('detail_schedules', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->uuid('schedules_id');
+            $table->date('date');
             $table->uuid('employee_id');
-            $table->date('date_start');
-            $table->date('date_end');
-            $table->tinyInteger('is_approve')->default(0);
-            $table->uuid('responsible_empoyee_id')->nullable();
+            $table->uuid('division_id')->nullable();
+            $table->uuid('position_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->ulid('created_by')->nullable();
             $table->ulid('updated_by')->nullable();
             $table->ulid('deleted_by')->nullable();
+            
         });
     }
 
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('leaves');
+        Schema::dropIfExists('detail_schedules');
     }
 };

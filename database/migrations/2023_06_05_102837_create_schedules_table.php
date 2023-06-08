@@ -13,11 +13,14 @@ return new class extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('employee_id');
-            $table->date('date');
+            $table->string('name');
             $table->time('start_in');
             $table->time('end_out');
             $table->timestamps();
+            $table->softDeletes();
+            $table->ulid('created_by')->nullable();
+            $table->ulid('updated_by')->nullable();
+            $table->ulid('deleted_by')->nullable();
         });
     }
 

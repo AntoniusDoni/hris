@@ -23,7 +23,7 @@ export default function FormModal(props) {
             address: "",
             date_in: "",
             date_out: "",
-            employee_status: "",
+            employee_status: "tetap",
         });
     const status = [{ value: "tetap" }];
     const handleOnChange = (event) => {
@@ -137,6 +137,7 @@ export default function FormModal(props) {
                         onChange={handleOnChange}
                         value={data.employee_status}
                     >
+                        
                         <option value={"tetap"}>PKTT</option>
                         <option value={"kontrak"}>PKWT</option>
                     </select>

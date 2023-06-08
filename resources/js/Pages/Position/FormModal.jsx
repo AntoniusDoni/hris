@@ -55,7 +55,7 @@ export default function FormModal(props) {
         <Modal
             isOpen={modalState.isOpen}
             toggle={handleClose}
-            title={"Divisi"}
+            title={"Jabatan"}
         >
             <FormInput
                 name="name"

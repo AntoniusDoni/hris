@@ -26,14 +26,14 @@ class EmployeeController extends Controller
             'name' => 'required|string|max:255',
             'division_id' => 'required|exists:divisions,id',
             'position_id' => 'required|exists:positions,id',
-            'nip' => 'required|string|max:20|min:4',
+            'nip' => 'required|string|max:20|min:4|unique:employees,nip',
             'email' => 'nullable|email|unique:users,email',
             'password' => 'required|string|max:255',
             'profile_image' => 'nullable|image',
             'phone' => 'nullable|number',
             'address' => 'nullable|string',
             'date_in' => 'required|date',
-            'date_out' => 'required|date',
+            'date_out' => 'nullable|date',
             'employee_status' => 'required|string',
         ]);
        
@@ -67,7 +67,7 @@ class EmployeeController extends Controller
             'phone' => 'nullable|number',
             'address' => 'nullable|string',
             'date_in' => 'required|date',
-            'date_out' => 'required|date',
+            'date_out' => 'nullable|date',
             'employee_status' => 'required|string',
         ]);
 

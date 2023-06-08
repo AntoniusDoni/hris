@@ -62,9 +62,9 @@ export default function Index(props) {
             errors={props.errors}
             flash={props.flash}
             page={'Dashboard'}
-            action={'Divisi'}
+            action={'Jabatan'}
         >
-            <Head title="Divisi"/>
+            <Head title="Jabatan"/>
 
             <div>
                 <div className="mx-auto sm:px-6 lg:px-8 ">

@@ -6,6 +6,7 @@ use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SchedulerController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -53,7 +54,10 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/employees/{employee}', [EmployeeController::class, 'update'])->name('employee.update');
     Route::delete('/employees/{employee}', [EmployeeController::class, 'destroy'])->name('employee.destroy');
     //Scheduler
-    Route::get('/Schedules', [PositionController::class, 'index'])->name('scheduler.index');
+    Route::get('/schedules', [SchedulerController::class, 'index'])->name('scheduler.index');
+    Route::post('/schedules', [SchedulerController::class, 'store'])->name('scheduler.store');
+    Route::put('/schedules/{scheduler}', [SchedulerController::class, 'update'])->name('scheduler.update');
+    Route::delete('/schedules/{scheduler}', [SchedulerController::class, 'destroy'])->name('scheduler.destroy');
 
 });
 
