@@ -68,6 +68,14 @@ export default [
                 route: route("scheduler.index"),
                 active: "schedules.*",
                 permission: "view-schedule",
+            },
+            {
+                name: "Jadwal Pegawai",
+                show: true,
+                icon: HiCalendar,
+                route: route("employee-scheduler.index"),
+                active: "employee-scheduler.*",
+                permission: "view-employee-scheduler",
             }
         ] 
     },

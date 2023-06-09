@@ -47,6 +47,12 @@ class PermissionSeeder extends Seeder
             ['id' => Str::ulid(), 'label' => 'Lihat Jadwal', 'name' => 'view-schedule'],
             ['id' => Str::ulid(), 'label' => 'Hapus Jadwal', 'name' => 'delete-schedule'],
 
+            ['id' => Str::ulid(), 'label' => 'Tambah Jadwal Pegawai', 'name' => 'create-employee-scheduler'],
+            ['id' => Str::ulid(), 'label' => 'Ubah Jadwal Pegawai', 'name' => 'update-employee-scheduler'],
+            ['id' => Str::ulid(), 'label' => 'Lihat Jadwal Pegawai', 'name' => 'view-employee-scheduler'],
+            ['id' => Str::ulid(), 'label' => 'Hapus Jadwal Pegawai', 'name' => 'delete-employee-scheduler'],
+
+
             ['id' => Str::ulid(), 'label' => 'Ubah Setting', 'name' => 'update-setting'],
             ['id' => Str::ulid(), 'label' => 'Lihat Setting', 'name' => 'view-setting'],
 

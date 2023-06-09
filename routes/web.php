@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\EmployeeScheduleController;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\ProfileController;
@@ -58,7 +59,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/schedules', [SchedulerController::class, 'store'])->name('scheduler.store');
     Route::put('/schedules/{scheduler}', [SchedulerController::class, 'update'])->name('scheduler.update');
     Route::delete('/schedules/{scheduler}', [SchedulerController::class, 'destroy'])->name('scheduler.destroy');
-
+    // employeeScheduler
+    Route::get('/employee-scheduler', [EmployeeScheduleController::class, 'index'])->name('employee-scheduler.index');
+    Route::get('/employee-scheduler/create', [EmployeeScheduleController::class, 'create'])->name('employee-scheduler.create');
+    Route::post('/employee-scheduler', [SchedulerController::class, 'store'])->name('employee-scheduler.store');
+    Route::put('/employee-scheduler/{scheduler}', [SchedulerController::class, 'update'])->name('employee-scheduler.update');
+    Route::delete('/employee-scheduler/{scheduler}', [SchedulerController::class, 'destroy'])->name('employee-scheduler.destroy');
 });
 
 Route::middleware('auth')->group(function () {
