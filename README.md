@@ -1,7 +1,11 @@
 # Laravel HRIS - With Flowbite
+# Laravel HRIS - With Flowbite
 
 This just a laravel template with breeze react, user role based access crud with setup flowbite admin template
+<<<<<<< HEAD
+=======
 
+>>>>>>> a9ce54e (Update README.md)
 
 ## Requirements
 

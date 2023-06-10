@@ -15,13 +15,16 @@ class DetailSchedules extends Model
     ];
 
     public function employee(){
-        return $this->hasMany(Employees::class);
+        return $this->belongsTo(Employees::class);
     }
 
     public function division(){
-        return $this->hasMany(Divisions::class);
+        return $this->belongsTo(Divisions::class);
     }
     public function position(){
-        return $this->hasMany(Positions::class);
+        return $this->belongsTo(Positions::class);
+    }
+    public function schedules(){
+        return $this->belongsTo(Schedules::class);
     }
 }

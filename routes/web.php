@@ -62,9 +62,10 @@ Route::middleware(['auth'])->group(function () {
     // employeeScheduler
     Route::get('/employee-scheduler', [EmployeeScheduleController::class, 'index'])->name('employee-scheduler.index');
     Route::get('/employee-scheduler/create', [EmployeeScheduleController::class, 'create'])->name('employee-scheduler.create');
-    Route::post('/employee-scheduler', [SchedulerController::class, 'store'])->name('employee-scheduler.store');
-    Route::put('/employee-scheduler/{scheduler}', [SchedulerController::class, 'update'])->name('employee-scheduler.update');
-    Route::delete('/employee-scheduler/{scheduler}', [SchedulerController::class, 'destroy'])->name('employee-scheduler.destroy');
+    Route::post('/employee-scheduler', [EmployeeScheduleController::class, 'store'])->name('employee-scheduler.store');
+    Route::get('/employee-scheduler/edit/{scheduler}', [EmployeeScheduleController::class, 'edit'])->name('employee-scheduler.edit');
+    Route::put('/employee-scheduler/{scheduler}', [EmployeeScheduleController::class, 'update'])->name('employee-scheduler.update');
+    Route::delete('/employee-scheduler/{scheduler}', [EmployeeScheduleController::class, 'destroy'])->name('employee-scheduler.destroy');
 });
 
 Route::middleware('auth')->group(function () {
