@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployeeScheduleController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SchedulerController;
 use App\Http\Controllers\UserController;
+use App\Models\Attendances;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -66,6 +68,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/employee-scheduler/edit/{scheduler}', [EmployeeScheduleController::class, 'edit'])->name('employee-scheduler.edit');
     Route::put('/employee-scheduler/{employeeScheduler}', [EmployeeScheduleController::class, 'update'])->name('employee-scheduler.update');
     Route::delete('/employee-scheduler/{scheduler}', [EmployeeScheduleController::class, 'destroy'])->name('employee-scheduler.destroy');
+    // Attendances
+    Route::get('/attendances', [AttendanceController::class, 'index'])->name('attendance.index');
+    Route::post('/attendances', [AttendanceController::class, 'store'])->name('attendance.store');
+    Route::put('/attendances/{attendance}', [AttendanceController::class, 'update'])->name('attendance.update');
+    Route::delete('/attendances/{attendance}', [AttendanceController::class, 'destroy'])->name('attendance.destroy');
+
 });
 
 Route::middleware('auth')->group(function () {

@@ -9,7 +9,7 @@ import { useModalState } from "@/hooks";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import Pagination from "@/Components/Pagination";
 import ModalConfirm from "@/Components/ModalConfirm";
-// import FormModal from './FormModal';
+import FormModal from './FormModal';
 import SearchInput from "@/Components/SearchInput";
 import { hasPermission } from "@/utils";
 import { Filter } from "@/Components/Filter";
@@ -24,22 +24,22 @@ export default function Index(props) {
     const preValue = usePrevious(search);
 
     const confirmModal = useModalState();
-    // const formModal = useModalState()
+    const formModal = useModalState()
 
-    // const toggleFormModal = (employee = null) => {
-    //     formModal.setData(employee)
-    //     formModal.toggle()
-    // }
-
-    const handleDeleteClick = (employee) => {
-        confirmModal.setData(employee);
+    const toggleFormModal = (attendance = null) => {
+        formModal.setData(attendance)
+        formModal.toggle()
+    }
+   
+    const handleDeleteClick = (attendance) => {
+        confirmModal.setData(attendance);
         confirmModal.toggle();
     };
 
     const onDelete = () => {
         if (confirmModal.data !== null) {
             router.delete(
-                route("employee-scheduler.destroy", confirmModal.data.id)
+                route("attendance.destroy", confirmModal.data.id)
             );
         }
     };
@@ -58,9 +58,9 @@ export default function Index(props) {
         }
     }, [search]);
 
-    const canCreate = hasPermission(auth, "create-employee-scheduler");
-    const canUpdate = hasPermission(auth, "update-employee-scheduler");
-    const canDelete = hasPermission(auth, "delete-employee-scheduler");
+    const canCreate = hasPermission(auth, "create-attendance");
+    const canUpdate = hasPermission(auth, "update-attendance");
+    const canDelete = hasPermission(auth, "delete-attendance");
 
     return (
         <AuthenticatedLayout
@@ -68,9 +68,9 @@ export default function Index(props) {
             errors={props.errors}
             flash={props.flash}
             page={"Dashboard"}
-            action={"Jadwal Pegawai"}
+            action={"Absen Pegawai"}
         >
-            <Head title="Jadwal Pegawai" />
+            <Head title="Absen Pegawai" />
 
             <div>
                 <div className="mx-auto sm:px-6 lg:px-8 ">
@@ -78,14 +78,7 @@ export default function Index(props) {
                         <div className="flex">
                             <div className="flex">
                                 {canCreate && (
-                                    <Link
-                                        href={route(
-                                            "employee-scheduler.create"
-                                        )}
-                                        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5"
-                                    >
-                                        Tambah
-                                    </Link>
+                                    <Button size="sm" onClick={() => toggleFormModal()}>Tambah</Button>
                                 )}
                             </div>
                             <div className="flex-auto flex justify-end">
@@ -158,53 +151,53 @@ export default function Index(props) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {data.map((employee) => (
+                                        {data.map((attendance) => (
                                             <tr
                                                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                                                key={employee.id}
+                                                key={attendance.id}
                                             >
                                                 <td
                                                     scope="row"
                                                     className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                                 >
-                                                    {employee?.date}
+                                                    {attendance?.date}
                                                 </td>
                                                 <td
                                                     scope="row"
                                                     className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                                 >
-                                                    {employee.employee.nip}
+                                                    {attendance.attendance.nip}
                                                 </td>
                                                 <td
                                                     scope="row"
                                                     className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                                 >
-                                                    {employee.employee.name}
+                                                    {attendance.attendance.name}
                                                 </td>
                                                 <td
                                                     scope="row"
                                                     className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                                 >
-                                                    {employee?.division?.name}
+                                                    {attendance?.division?.name}
                                                 </td>
                                                 <td
                                                     scope="row"
                                                     className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                                 >
-                                                    {employee?.position?.name}
+                                                    {attendance?.position?.name}
                                                 </td>
 
                                                 <td
                                                     scope="row"
                                                     className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                                 >
-                                                    {employee?.start_in}
+                                                    {attendance?.start_in}
                                                 </td>
                                                 <td
                                                     scope="row"
                                                     className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                                 >
-                                                    {employee?.end_out}
+                                                    {attendance?.end_out}
                                                 </td>
                                                 <td className="py-4 px-6 flex justify-end">
                                                     <Dropdown
@@ -218,8 +211,8 @@ export default function Index(props) {
                                                             <Dropdown.Item>
                                                                 <Link
                                                                     href={route(
-                                                                        "employee-scheduler.edit",
-                                                                        employee
+                                                                        "attendance-scheduler.edit",
+                                                                        attendance
                                                                     )}
                                                                     className="flex space-x-1 items-center"
                                                                 >
@@ -234,7 +227,7 @@ export default function Index(props) {
                                                             <Dropdown.Item
                                                                 onClick={() =>
                                                                     handleDeleteClick(
-                                                                        employee
+                                                                        attendance
                                                                     )
                                                                 }
                                                             >
@@ -261,9 +254,9 @@ export default function Index(props) {
                 </div>
             </div>
             <ModalConfirm modalState={confirmModal} onConfirm={onDelete} />
-            {/* <FormModal
+            <FormModal
                 modalState={formModal}
-            /> */}
+            />
         </AuthenticatedLayout>
     );
 }

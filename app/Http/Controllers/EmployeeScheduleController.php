@@ -28,6 +28,13 @@ class EmployeeScheduleController extends Controller
                 'end_out'
             )->orderBy('date', 'ASC');
 
+            if($request->q!=''){
+                $query->whereHas('employee', function ($query) use ($request) {
+                    $query->where('name', 'like', "%{$request->q}%")->orWhere('nip', '=', $request->q);
+                });
+               
+            }
+
         return inertia('EmployeeSchedule/Index', [
             'query' => $query->paginate(10),
         ]);
@@ -71,7 +78,7 @@ class EmployeeScheduleController extends Controller
         }else if($request->long_day==5){
             $period = CarbonPeriod::between($start, $end)->filter('isWeekday');
         }
-        var_dump($period);
+        // var_dump($period);
 
         if ($request->is_employee == true) {
             $request->validate(['employee_id' => 'required|exists:employees,id']);
@@ -92,7 +99,7 @@ class EmployeeScheduleController extends Controller
                         'division_id' => $request->division_id,
                         'employee_id' => $request->employee_id,
                         'position_id' => $request->position_id,
-                        'date' => $date,
+                        'date' => $day,
                     ]);
                 }
                 session()->flash('message', ['type' => 'success', 'message' => 'Item has beed saved']);

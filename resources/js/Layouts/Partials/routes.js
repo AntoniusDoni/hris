@@ -33,6 +33,14 @@ export default [
         permission: "view-dashboard",
     },
     {
+        name: "Absensi",
+        show: true,
+        icon: HiCalendar,
+        route: route("attendance.index"),
+        active: "attendance",
+        permission: "view-attendance",
+    },
+    {
         name: "Master",
         show: true,
         icon: HiDocument,
