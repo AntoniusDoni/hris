@@ -37,7 +37,7 @@ export default function Index(props) {
 
     const onDelete = () => {
         if (confirmModal.data !== null) {
-            router.delete(route("employee.destroy", confirmModal.data.id));
+            router.delete(route("employee-scheduler.destroy", confirmModal.data.id));
         }
     };
 

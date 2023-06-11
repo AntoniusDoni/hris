@@ -65,7 +65,7 @@ export default function Form(props) {
     };
     const handleSubmit = () => {
         if (isEmpty(employeeScheduler) === false) {
-            put(route("employee-scheduler", employeeScheduler));
+            put(route("employee-scheduler.update", employeeScheduler));
             return;
         }
         post(route("employee-scheduler.store"), {
@@ -235,7 +235,7 @@ export default function Form(props) {
                             </Button>
                             <Button
                                 onClick={() => router.visit(route("employee-scheduler.index"))} 
-                                processing={processing}
+                                // processing={processing}
                                 type="secondary"
                             >
                                 Batal

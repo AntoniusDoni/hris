@@ -64,7 +64,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/employee-scheduler/create', [EmployeeScheduleController::class, 'create'])->name('employee-scheduler.create');
     Route::post('/employee-scheduler', [EmployeeScheduleController::class, 'store'])->name('employee-scheduler.store');
     Route::get('/employee-scheduler/edit/{scheduler}', [EmployeeScheduleController::class, 'edit'])->name('employee-scheduler.edit');
-    Route::put('/employee-scheduler/{scheduler}', [EmployeeScheduleController::class, 'update'])->name('employee-scheduler.update');
+    Route::put('/employee-scheduler/{employeeScheduler}', [EmployeeScheduleController::class, 'update'])->name('employee-scheduler.update');
     Route::delete('/employee-scheduler/{scheduler}', [EmployeeScheduleController::class, 'destroy'])->name('employee-scheduler.destroy');
 });
 
