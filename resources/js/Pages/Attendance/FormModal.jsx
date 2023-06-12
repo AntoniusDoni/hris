@@ -29,8 +29,8 @@ export default function FormModal(props) {
     };
 
     const handleReset = () => {
-        modalState.setData(null);
-        setData('employee_id',"");
+        // modalState.setData(null);
+        // setData("employee_id","");
         reset();
         clearErrors();
     };
