@@ -160,44 +160,44 @@ export default function Index(props) {
                                                     scope="row"
                                                     className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                                 >
-                                                    {attendance?.date}
+                                                    {attendance?.date_at}
                                                 </td>
                                                 <td
                                                     scope="row"
                                                     className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                                 >
-                                                    {attendance.attendance.nip}
+                                                    {attendance?.employee?.nip}
                                                 </td>
                                                 <td
                                                     scope="row"
                                                     className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                                 >
-                                                    {attendance.attendance.name}
+                                                    {attendance?.employee?.name}
                                                 </td>
                                                 <td
                                                     scope="row"
                                                     className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                                 >
-                                                    {attendance?.division?.name}
+                                                    {attendance?.employee?.division?.name}
                                                 </td>
                                                 <td
                                                     scope="row"
                                                     className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                                 >
-                                                    {attendance?.position?.name}
+                                                    {attendance?.employee?.position?.name}
                                                 </td>
 
                                                 <td
                                                     scope="row"
                                                     className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                                 >
-                                                    {attendance?.start_in}
+                                                    {attendance?.time_in}
                                                 </td>
                                                 <td
                                                     scope="row"
                                                     className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                                 >
-                                                    {attendance?.end_out}
+                                                    {attendance?.time_out}
                                                 </td>
                                                 <td className="py-4 px-6 flex justify-end">
                                                     <Dropdown
@@ -208,20 +208,12 @@ export default function Index(props) {
                                                         size={"sm"}
                                                     >
                                                         {canUpdate && (
-                                                            <Dropdown.Item>
-                                                                <Link
-                                                                    href={route(
-                                                                        "attendance-scheduler.edit",
-                                                                        attendance
-                                                                    )}
-                                                                    className="flex space-x-1 items-center"
-                                                                >
-                                                                    <HiPencil />
-                                                                    <div>
-                                                                        Ubah
-                                                                    </div>
-                                                                </Link>
-                                                            </Dropdown.Item>
+                                                           <Dropdown.Item onClick={() => toggleFormModal(attendance)}>
+                                                           <div className='flex space-x-1 items-center'>
+                                                               <HiPencil/> 
+                                                               <div>Ubah</div>
+                                                           </div>
+                                                       </Dropdown.Item>
                                                         )}
                                                         {canDelete && (
                                                             <Dropdown.Item

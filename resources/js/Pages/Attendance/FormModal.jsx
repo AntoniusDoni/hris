@@ -11,10 +11,10 @@ export default function FormModal(props) {
     const { modalState } = props;
     const { data, setData, post, put, processing, errors, reset, clearErrors } =
         useForm({
-            date_at: new Date(),
+            date_at: "",
             employee_id: "",
             time_attendance: "",
-            is_attendance: "1",
+            is_attendance: 1,
         });
 
     const handleOnChange = (event) => {
@@ -30,6 +30,7 @@ export default function FormModal(props) {
 
     const handleReset = () => {
         modalState.setData(null);
+        setData('employee_id',"");
         reset();
         clearErrors();
     };
@@ -53,11 +54,11 @@ export default function FormModal(props) {
     };
 
     useEffect(() => {
-        const employee = modalState.data;
-        if (isEmpty(employee) === false) {
+        const attendance = modalState.data;
+        if (isEmpty(attendance) === false) {
             setData({
-                date_at: "",
-                employee_id: "",
+                date_at: attendance.date_at,
+                employee_id: attendance.employee_id,
                 time_attendance: "",
                 is_attendance: "",
             });
@@ -94,8 +95,8 @@ export default function FormModal(props) {
                     onChange={handleOnChange}
                     value={data.is_attendance}
                 >
-                    <option value={"1"}>Absen Masuk </option>
-                    <option value={"2"}>Absen Pulang</option>
+                    <option value={1}>Absen Masuk </option>
+                    <option value={2}>Absen Pulang</option>
                 </select>
             </div>
             <FormInput
