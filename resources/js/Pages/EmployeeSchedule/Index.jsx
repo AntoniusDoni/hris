@@ -173,13 +173,13 @@ export default function Index(props) {
                                                     scope="row"
                                                     className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                                 >
-                                                    {employee.employee.nip}
+                                                    {employee?.employee?.nip}
                                                 </td>
                                                 <td
                                                     scope="row"
                                                     className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                                 >
-                                                    {employee.employee.name}
+                                                    {employee?.employee?.name}
                                                 </td>
                                                 <td
                                                     scope="row"
