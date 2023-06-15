@@ -169,21 +169,20 @@ export default function Index(props) {
                                                     scope="row"
                                                     className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                                 >
-                                                    {attendance?.employee?.nip}
+                                                    {attendance?.nip}
                                                 </td>
                                                 <td
                                                     scope="row"
                                                     className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                                 >
-                                                    {attendance?.employee?.name}
+                                                    {attendance?.name}
                                                 </td>
                                                 <td
                                                     scope="row"
                                                     className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                                 >
                                                     {
-                                                        attendance?.employee
-                                                            ?.division?.name
+                                                        attendance?.division_name
                                                     }
                                                 </td>
                                                 <td
@@ -191,8 +190,7 @@ export default function Index(props) {
                                                     className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                                 >
                                                     {
-                                                        attendance?.employee
-                                                            ?.position?.name
+                                                        attendance?.position_name
                                                     }
                                                 </td>
 

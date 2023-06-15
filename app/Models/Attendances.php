@@ -16,6 +16,6 @@ class Attendances extends Model
         'long',
     ];
     public function employee(){
-        return $this->belongsTo(Employees::class);
+        return $this->hasMany(Employees::class,'id');
     }
 }

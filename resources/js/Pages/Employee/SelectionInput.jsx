@@ -120,7 +120,7 @@ export default function SelectionInput(props) {
 
     useEffect(() => {
         if (itemSelected !== null) {
-            console.log(itemSelected)
+            // console.log(itemSelected)
             const item = showItems.find(item => item.id === itemSelected)
 
             if (item) {
