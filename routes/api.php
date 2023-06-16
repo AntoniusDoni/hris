@@ -5,8 +5,7 @@ use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\PositionController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\ScheduleController;
-use App\Http\Controllers\AuthApiController;
-use App\Http\Middleware\JwtMiddleware;
+use App\Http\Controllers\Api\AuthApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,4 +30,13 @@ Route::get('/positions', [PositionController::class, 'index'])->name('api.positi
 Route::get('/scheduler', [ScheduleController::class, 'index'])->name('api.scheduler.index');
 Route::get('/employee', [EmployeeController::class, 'index'])->name('api.employee.index');
 
-Route::post('login', [AuthApiController::class, 'authenticate'])->middleware('api');
+Route::post('login', [AuthApiController::class, 'authenticate']);
+Route::group(['prefix'=>'v1','middleware' => ['jwt.verify','api']], function() {
+    Route::get('logout', [AuthApiController::class, 'logout']);
+    Route::get('user', [AuthApiController::class, 'get_user']);
+    Route::get('refresh-token', [AuthApiController::class, 'refreshtoken']);
+    // Route::get('products/{id}', [ProductController::class, 'show']);
+    // Route::post('create', [ProductController::class, 'store']);
+    // Route::put('update/{product}',  [ProductController::class, 'update']);
+    // Route::delete('delete/{product}',  [ProductController::class, 'destroy']);
+});

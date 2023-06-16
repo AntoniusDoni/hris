@@ -4,9 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Exception;
-use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Tymon\JWTAuth\Facades\JWTAuth;
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 class JwtMiddleware
 {
@@ -18,11 +16,12 @@ class JwtMiddleware
     public function handle($request, Closure $next)
     {
         try {
-            $user = JWTAuth::parseToken()->authenticate();
+            JWTAuth::parseToken()->authenticate();
+            // dd($user);
         } catch (Exception $e) {
-            if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException) {
+            if ($e instanceof \PHPOpenSourceSaver\JWTAuth\Exceptions\TokenInvalidException) {
                 return response()->json(['status' => 'Token is Invalid']);
-            } else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException) {
+            } else if ($e instanceof \PHPOpenSourceSaver\JWTAuth\Exceptions\TokenExpiredException) {
                 return response()->json(['status' => 'Token is Expired']);
             } else {
                 return response()->json(['status' => 'Authorization Token not found']);

@@ -14,25 +14,28 @@ class EmployeeScheduleController extends Controller
     //
     public function index(Request $request)
     {
-        $query = DetailSchedules::query()->with(['employee', 'division', 'position'])
+        $query = DetailSchedules::query()
             ->join('schedules', 'schedules.id', '=', 'detail_schedules.schedules_id')
+            ->join('employees', 'employees.id', '=', 'detail_schedules.employee_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.division_id')
+            ->join('positions', 'positions.id', '=', 'employees.position_id')
             ->select(
                 'detail_schedules.id as id',
                 'schedules_id',
                 'date',
                 'employee_id',
-                'division_id',
-                'position_id',
-                'name',
+                'detail_schedules.division_id',
+                'detail_schedules.position_id',
+                'schedules.name as name',
                 'start_in',
-                'end_out'
+                'end_out','nip','employees.name as employee_name','divisions.name as division_name','positions.name as position_name'
             )->orderBy('date', 'ASC');
 
             if($request->q!=''){
                 $query->whereHas('employee', function ($query) use ($request) {
                     $query->where('name', 'like', "%{$request->q}%")->orWhere('nip', '=', $request->q);
                 });
-               
+
             }
 
         return inertia('EmployeeSchedule/Index', [
@@ -74,7 +77,7 @@ class EmployeeScheduleController extends Controller
             $period = CarbonPeriod::between($start, $end)->filter(function ($date) {
                 return !$date->isSunday();
             });
-         
+
         }else if($request->long_day==5){
             $period = CarbonPeriod::between($start, $end)->filter('isWeekday');
         }

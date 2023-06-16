@@ -3,13 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Notifications\Notifiable;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
+
 
 class Employees extends Authenticatable implements JWTSubject
 {
     // use HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
+
     protected $fillable = [
         'name',
         'division_id',
@@ -24,6 +28,7 @@ class Employees extends Authenticatable implements JWTSubject
         'date_out',
         'employee_status',
     ];
+    protected $table="employees";
 
     public function attendance(){
         return $this->hasOne(Attendances::class,'employee_id','id');
