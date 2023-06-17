@@ -6,24 +6,23 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
-
-// use PHPOpenSourceSaver\JWTAuth\JWTAuth;
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 class AuthApiController extends Controller
 {
 
-    // public function __construct()
-    // {
-    //     $this->middleware('auth:api', ['except' => ['authenticate']]);
-    // }
+    public function __construct()
+    {
+        $this->middleware('jwt.verify', ['except' => ['authenticate']]);
+    }
 
     public function authenticate(Request $request)
     {
-        $credentials = $request->only('nip', 'password');
+        $credentials = $request->only('email', 'password');
 
         //valid credential
         $validator = Validator::make($credentials, [
-            'nip' => 'required|string|min:4',
+            'email' => 'required|string|min:4',
             'password' => 'required|string|min:6|max:50'
         ]);
 
@@ -34,7 +33,8 @@ class AuthApiController extends Controller
             ], 401);
         }
 
-        $user = Auth::guard('api')->user();
+        $user = auth('api')->user();
+
         return response()->json([
             'user' => $user,
             'authorization' => [
@@ -46,9 +46,10 @@ class AuthApiController extends Controller
 
     public function get_user(Request $request)
     {
-
+        $token=$request->headers->get('token');
         $user = Auth::guard('api')->user();
-        return response()->json([ 'success' => true,'user' => $user]);
+        $token = auth('api')->check();
+        return response()->json([ 'success' => true,'user' => $user,'token'=>$token]);
     }
     public function logout(Request $request)
     {
@@ -57,11 +58,12 @@ class AuthApiController extends Controller
             'message' => 'Successfully logged out',
         ]);
     }
-    public function refreshtoken()
+    public function refreshtoken(Request $request)
     {
 
+
         return response()->json([
-            'user' => Auth::guard('api')->user(),
+            'user' => Auth::guard('api')->authenticate(),
             'authorization' => [
                 'token' => Auth::guard('api')->refresh(),
                 'type' => 'bearer',

@@ -31,7 +31,7 @@ Route::get('/scheduler', [ScheduleController::class, 'index'])->name('api.schedu
 Route::get('/employee', [EmployeeController::class, 'index'])->name('api.employee.index');
 
 Route::post('login', [AuthApiController::class, 'authenticate']);
-Route::group(['prefix'=>'v1','middleware' => ['jwt.verify','api']], function() {
+Route::group(['prefix'=>'v1','middleware' => ['api','jwt.verify']], function() {
     Route::get('logout', [AuthApiController::class, 'logout']);
     Route::get('user', [AuthApiController::class, 'get_user']);
     Route::get('refresh-token', [AuthApiController::class, 'refreshtoken']);

@@ -12,7 +12,7 @@ use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 class Employees extends Authenticatable implements JWTSubject
 {
     // use HasFactory, Notifiable;
-    use HasApiTokens, HasFactory, Notifiable;
+    use Notifiable;
 
     protected $fillable = [
         'name',

@@ -16,8 +16,11 @@ class JwtMiddleware
     public function handle($request, Closure $next)
     {
         try {
-            JWTAuth::parseToken()->authenticate();
-            // dd($user);
+            // if (
+                JWTAuth::parseToken()->authenticate();
+                // ) {
+                // return response()->json(['user_not_found'], 404);
+            // }
         } catch (Exception $e) {
             if ($e instanceof \PHPOpenSourceSaver\JWTAuth\Exceptions\TokenInvalidException) {
                 return response()->json(['status' => 'Token is Invalid']);
