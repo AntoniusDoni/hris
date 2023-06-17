@@ -2,18 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
 
-class Employees extends Authenticatable implements JWTSubject
+class Employees extends Model
 {
-    // use HasFactory, Notifiable;
-    use Notifiable;
-
     protected $fillable = [
         'name',
         'division_id',
@@ -41,12 +33,5 @@ class Employees extends Authenticatable implements JWTSubject
     public function position(){
         return $this->belongsTo(Positions::class);
     }
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
-    public function getJWTCustomClaims()
-    {
-        return [];
-    }
+
 }
