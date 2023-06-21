@@ -19,24 +19,22 @@ class AuthApiController extends Controller
     public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
-
         //valid credential
         $validator = Validator::make($credentials, [
             'email' => 'required|string|min:4',
             'password' => 'required|string|min:6|max:50'
         ]);
-
         $token = auth('api')->attempt($credentials);
         if (!$token) {
             return response()->json([
                 'message' => 'Unauthorized',
             ], 401);
         }
-
         $user = auth('api')->user();
-
+        $role=$user?->role;
         return response()->json([
             'user' => $user,
+            // 'role'=>$user?->role?->name,
             'authorization' => [
                 'token' => $token,
                 'type' => 'bearer',
