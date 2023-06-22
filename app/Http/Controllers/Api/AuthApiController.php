@@ -43,6 +43,7 @@ class AuthApiController extends Controller
         $userRespose=[
             'id'=>$employee->id,
             'nip'=>$employee->nip,
+            'name'=>$employee->name,
             'email'=>$employee->email,
             'phone'=>$employee->phone,
             'address'=>$employee->address,
