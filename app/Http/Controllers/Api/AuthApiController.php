@@ -47,6 +47,7 @@ class AuthApiController extends Controller
             'email'=>$employee->email,
             'phone'=>$employee->phone,
             'address'=>$employee->address,
+            'image_profile'=>$employee->profile_image,
             'employee_status'=>$employee->employee_status,
             'date_in'=>$employee->date_in,
             'date_out'=>$employee->date_out,
