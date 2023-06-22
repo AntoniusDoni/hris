@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
+use function PHPUnit\Framework\isEmpty;
+
 class AuthApiController extends Controller
 {
 
@@ -32,9 +34,28 @@ class AuthApiController extends Controller
         }
         $user = auth('api')->user();
         $role=$user?->role;
+        $employee=$user->employee;
+        if ($employee==null){
+            return response()->json([
+                'message' => 'Unauthorized',
+            ], 401);
+        }
+        $userRespose=[
+            'id'=>$employee->id,
+            'nip'=>$employee->nip,
+            'email'=>$employee->email,
+            'phone'=>$employee->phone,
+            'address'=>$employee->address,
+            'employee_status'=>$employee->employee_status,
+            'date_in'=>$employee->date_in,
+            'date_out'=>$employee->date_out,
+            'divisi'=>$employee?->division?->name,
+            'position'=>$employee?->position?->name,
+            'role'=>$role?->name,
+            'user_identity'=>$user->id,
+        ];
         return response()->json([
-            'user' => $user,
-            // 'role'=>$user?->role?->name,
+            'user' => $userRespose,
             'authorization' => [
                 'token' => $token,
                 'type' => 'bearer',

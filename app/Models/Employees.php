@@ -20,7 +20,21 @@ class Employees extends Model
         'date_out',
         'employee_status',
     ];
-    protected $table="employees";
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'password',
+        'created_at',
+        'updated_at',
+        'deleted_at',
+        'created_by',
+        'updated_by',
+        'deleted_by',
+
+    ];
 
     public function attendance(){
         return $this->hasOne(Attendances::class,'employee_id','id');

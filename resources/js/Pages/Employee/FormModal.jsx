@@ -5,6 +5,7 @@ import Button from "@/Components/Button";
 import FormInput from "@/Components/FormInput";
 import SelectedInputDevision from "../Division/SelectionInput";
 import SeletedInputPosition from "../Position/SelectionInput";
+import RoleSelectionInput from "../Role/SelectionInput";
 import { isEmpty } from "lodash";
 import FormInputDate from "@/Components/FormInputDate";
 
@@ -24,6 +25,7 @@ export default function FormModal(props) {
             date_in: "",
             date_out: "",
             employee_status: "tetap",
+            role_id:"",
         });
     const status = [{ value: "tetap" }];
     const handleOnChange = (event) => {
@@ -108,7 +110,7 @@ export default function FormModal(props) {
                         error={errors.name}
                     />
                 </div>
-                
+
             </div>
             <div className="flex">
                 <div className="flex-auto px-2">
@@ -137,10 +139,18 @@ export default function FormModal(props) {
                         onChange={handleOnChange}
                         value={data.employee_status}
                     >
-                        
+
                         <option value={"tetap"}>PKTT</option>
                         <option value={"kontrak"}>PKWT</option>
                     </select>
+                </div>
+                <div className="flex-auto px-2">
+                    <RoleSelectionInput
+                        label="Role"
+                        itemSelected={data.role_id}
+                        onItemSelected={(id) => setData('role_id', id)}
+                        error={errors.role_id}
+                    />
                 </div>
             </div>
             <div className="flex">
@@ -193,7 +203,6 @@ export default function FormModal(props) {
                 </div>
             </div>
             <div className="flex">
-                
                 <div className="flex-auto px-2">
                     <FormInput
                         name="address"
@@ -203,8 +212,9 @@ export default function FormModal(props) {
                         error={errors.address}
                     />
                 </div>
+
             </div>
-           
+
 
             <div className="flex items-center">
                 <Button onClick={handleSubmit} processing={processing}>

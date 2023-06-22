@@ -26,6 +26,7 @@ class User extends Authenticatable implements JWTSubject
         'password',
         'role_id',
         'reset_token',
+        'employee_id',
     ];
 
     /**
@@ -54,13 +55,15 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->belongsTo(Role::class);
     }
+    public function employee(){
+        return $this->belongsTo(Employees::class);
+    }
 
     public function allow($permission, $abort = false)
     {
         if ($this->role_id == null) {
             return true;
         }
-
         $permit = $this->role()->whereHas('permissions', function ($query) use ($permission) {
             return $query->where('name', $permission);
         })->first();
