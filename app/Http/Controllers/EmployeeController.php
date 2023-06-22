@@ -11,7 +11,7 @@ class EmployeeController extends Controller
     //
     public function index(Request $request)
     {
-        $query = Employees::query()->with(['division', 'position']);
+        $query = Employees::query()->with(['division', 'position','user']);
         if ($request->q) {
             $query->where('name', 'like', "%{$request->q}%")->orWhere('nip', '=', $request->q);
         }

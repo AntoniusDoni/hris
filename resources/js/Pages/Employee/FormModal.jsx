@@ -66,6 +66,7 @@ export default function FormModal(props) {
     useEffect(() => {
         const employee = modalState.data;
         if (isEmpty(employee) === false) {
+
             setData({
                 name: employee.name,
                 division_id: employee.division_id,
@@ -75,10 +76,11 @@ export default function FormModal(props) {
                 profile_image: employee.profile_image,
                 email: employee.email,
                 phone: employee.phone,
-                address: employee.address,
+                address: employee?.address,
                 date_in: employee.date_in,
-                date_out: employee.date_out,
+                date_out: employee?.date_out,
                 employee_status: employee.employee_status,
+                role_id:employee?.user?.role_id
             });
             return;
         }

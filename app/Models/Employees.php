@@ -47,5 +47,8 @@ class Employees extends Model
     public function position(){
         return $this->belongsTo(Positions::class);
     }
+    public function user(){
+        return $this->hasOne(User::class,'employee_id');
+    }
 
 }
