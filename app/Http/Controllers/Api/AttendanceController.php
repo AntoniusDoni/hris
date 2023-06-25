@@ -20,6 +20,8 @@ class AttendanceController extends Controller
                     'date_at' => $request->date_at,
                     'time_in' => $request->time_attendance,
                     'is_in' => 1,
+                    'lat'=>$request->lat,
+                    'long'=>$request->long,
                 ]
             );
             if ($attendace->exists) {
@@ -41,6 +43,8 @@ class AttendanceController extends Controller
                     'date_at' => $request->date_at,
                     'time_out' => $request->time_attendance,
                     'is_out' => 2,
+                    'lat'=>$request->lat,
+                    'long'=>$request->long,
                 ]
             );
         

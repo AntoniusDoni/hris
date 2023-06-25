@@ -22,6 +22,8 @@ class AttendaceRequest extends FormRequest
             'date_at' => 'required|date',
             'employee_id' => 'required|exists:employees,id',
             'time_attendance' => 'required',
+            'lat'=>'required',
+            'long'=>'required',
             
         ];
     }
