@@ -33,7 +33,7 @@ class AttendanceController extends Controller
             'time_attendance' => 'required',
             'is_attendance' => 'required',
         ]);
-        // dd($request->is_attendance ==='2',$request->is_attendance,$request);
+        
         if ($request->is_attendance === '2') {
             $Attendances = Attendances::updateOrCreate(
                 ['date_at' => $request->date_at, 'employee_id' => $request->employee_id],
@@ -65,5 +65,7 @@ class AttendanceController extends Controller
 
     public function destroy(Attendances $attendance)
     {
+        $attendance->delete();
+        session()->flash('message', ['type' => 'success', 'message' => 'Item has beed deleted']);
     }
 }
