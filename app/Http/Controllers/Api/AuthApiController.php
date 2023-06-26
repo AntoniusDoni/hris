@@ -69,6 +69,7 @@ class AuthApiController extends Controller
     {
         $token=$request->headers->get('token');
         $user = Auth::guard('api')->user();
+        
         $token = auth('api')->check();
         return response()->json([ 'success' => true,'user' => $user,'token'=>$token]);
     }
@@ -81,10 +82,32 @@ class AuthApiController extends Controller
     }
     public function refreshtoken(Request $request)
     {
-
-
+        $user = Auth::guard('api')->authenticate();
+        $role=$user?->role;
+        $employee=$user->employee;
+        if ($employee==null){
+            return response()->json([
+                'message' => 'Unauthorized',
+            ], 401);
+        }
+        $userRespose=[
+            'id'=>$employee->id,
+            'nip'=>$employee->nip,
+            'name'=>$employee->name,
+            'email'=>$employee->email,
+            'phone'=>$employee->phone,
+            'address'=>$employee->address,
+            'image_profile'=>$employee->profile_image,
+            'employee_status'=>$employee->employee_status,
+            'date_in'=>$employee->date_in,
+            'date_out'=>$employee->date_out,
+            'divisi'=>$employee?->division?->name,
+            'position'=>$employee?->position?->name,
+            'role'=>$role?->name,
+            'user_identity'=>$user->id,
+        ];
         return response()->json([
-            'user' => Auth::guard('api')->authenticate(),
+            'user' => $userRespose,
             'authorization' => [
                 'token' => Auth::guard('api')->refresh(),
                 'type' => 'bearer',
