@@ -13,7 +13,6 @@ class AttendanceController extends Controller
 
     public function stroreIn(AttendaceRequest $request)
     {
-       
             $attendace = Attendances::create(
                 [
                     'employee_id' => $request->employee_id,
@@ -36,7 +35,6 @@ class AttendanceController extends Controller
     }
     public function stroreOut(AttendaceRequest $request)
     {
-      
             $attendace = Attendances::where(['date_at' => $request->date_at, 'employee_id' => $request->employee_id])->update(
                 [
                     'employee_id' => $request->employee_id,

@@ -4,6 +4,9 @@ import { isEmpty } from "lodash";
 export const formatDate = (date) => {
     return moment(date).format("DD/MM/yyyy");
 };
+export const formatDateLocal = (date) => {
+    return moment(date).format("yyyy-MM-DD");
+};
 
 export const formatDateTime = (date) => {
     return moment(date).format("DD/MM/yyyy HH:mm:ss");
@@ -11,6 +14,9 @@ export const formatDateTime = (date) => {
 
 export const dateToString = (date) => {
     return moment(date).format("MM/DD/yyyy");
+};
+export const dateToStringLocal = (date) => {
+    return moment(date).format("yyyy-MM-DD");
 };
 
 export const converToDate = (date) => {

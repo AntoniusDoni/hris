@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\PositionController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\ScheduleController;
 use App\Http\Controllers\Api\AuthApiController;
+use App\Http\Controllers\Api\EmployeeScheduleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -42,4 +43,5 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'jwt.verify']], function
     Route::post('attendace', [AttendanceController::class, 'stroreIn']);
     Route::post('attendaceout',  [AttendanceController::class, 'stroreOut']);
     Route::post('leaves',  [LeavesController::class, 'store']);
+    Route::get('schedule', [EmployeeScheduleController::class, 'index']);
 });
