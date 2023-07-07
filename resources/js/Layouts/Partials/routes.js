@@ -45,7 +45,7 @@ export default [
         name: "Cuti",
         show: true,
         icon: HiOutlineLogin,
-        route: route("attendance.index"),
+        route: route("leave.index"),
         active: "leave",
         permission: "view-leave",
     },

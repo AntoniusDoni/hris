@@ -5,12 +5,12 @@ use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployeeScheduleController;
 use App\Http\Controllers\GeneralController;
+use App\Http\Controllers\LeavesController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SchedulerController;
 use App\Http\Controllers\UserController;
-use App\Models\Attendances;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -73,7 +73,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/attendances', [AttendanceController::class, 'store'])->name('attendance.store');
     Route::put('/attendances/{attendance}', [AttendanceController::class, 'update'])->name('attendance.update');
     Route::delete('/attendances/{attendance}', [AttendanceController::class, 'destroy'])->name('attendance.destroy');
-
+    //Leaves
+    Route::get('/leaves', [LeavesController::class, 'index'])->name('leave.index');
 });
 
 Route::middleware('auth')->group(function () {

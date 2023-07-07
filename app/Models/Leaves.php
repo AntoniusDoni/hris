@@ -11,4 +11,8 @@ class Leaves extends Model
         'is_approve',
         'responsible_empoyee_id'
     ];
+
+    public function employee(){
+        return $this->belongsTo(Employees::class);
+    }
 }
