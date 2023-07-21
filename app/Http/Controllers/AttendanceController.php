@@ -4,18 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Attendances;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AttendanceController extends Controller
 {
     //
     public function index(Request $request)
     {
+        $user = Auth::user();
         $query = Attendances::query()
             ->join('employees', 'employees.id', '=', 'attendances.employee_id')
             ->join('divisions', 'divisions.id', '=', 'employees.division_id')
             ->join('positions', 'positions.id', '=', 'employees.position_id')
-            ->select('attendances.*','nip','employees.name as name','divisions.name as division_name','positions.name as position_name');
-
+            ->select('attendances.*', 'nip', 'employees.name as name', 'divisions.name as division_name', 'positions.name as position_name');
+        if ($user?->role?->name == "Karyawan") {
+            $query->where('employees.id', '=', $user->employee_id);
+        }
         if ($request->q != '') {
             $query->where('name', 'like', "%{$request->q}%")->orWhere('nip', '=', $request->q);
         }
@@ -33,7 +37,7 @@ class AttendanceController extends Controller
             'time_attendance' => 'required',
             'is_attendance' => 'required',
         ]);
-        
+
         if ($request->is_attendance === '2') {
             $Attendances = Attendances::updateOrCreate(
                 ['date_at' => $request->date_at, 'employee_id' => $request->employee_id],

@@ -75,6 +75,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/attendances/{attendance}', [AttendanceController::class, 'destroy'])->name('attendance.destroy');
     //Leaves
     Route::get('/leaves', [LeavesController::class, 'index'])->name('leave.index');
+    Route::put('/leaves/{leave}', [LeavesController::class, 'update'])->name('leave.update');
 });
 
 Route::middleware('auth')->group(function () {
