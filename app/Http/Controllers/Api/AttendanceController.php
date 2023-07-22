@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AttendaceRequest;
 use App\Models\Attendances;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
@@ -45,7 +46,7 @@ class AttendanceController extends Controller
                     'long'=>$request->long,
                 ]
             );
-        
+
             if ($attendace) {
                 return response()->json([
                     'message' => "Absensi Berhasil",
@@ -77,5 +78,26 @@ class AttendanceController extends Controller
             ], 201);
         }
 
+    }
+    function GetHistoryAttendace(Request $request){
+        if($request->month==""||$request->employee_id==""){
+            return response()->json([
+                'message' => "Request invalid",
+            ], 400);
+        }
+        $attendace=Attendances::whereMonth('date_at',Carbon::now()->month)->where('employee_id','=', $request->employee_id)->get();
+
+        if (!empty($attendace)) {
+            return response()->json([
+                'message' => "Data Riwayat Abensi ",
+                'flag' => '2',
+                'attendance' => $attendace,
+            ]);
+        } else {
+            return response()->json([
+                'message' => "Belum Ada Riwayat Absensi",
+                'flag' => '1'
+            ], 201);
+        }
     }
 }
