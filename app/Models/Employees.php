@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 class Employees extends Model
 {
@@ -20,6 +20,25 @@ class Employees extends Model
         'date_out',
         'employee_status',
     ];
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'password',
+        'created_at',
+        'updated_at',
+        'deleted_at',
+        'created_by',
+        'updated_by',
+        'deleted_by',
+
+    ];
+
+    public function attendance(){
+        return $this->hasOne(Attendances::class,'employee_id','id');
+    }
 
     public function division(){
         return $this->belongsTo(Divisions::class);
@@ -28,4 +47,8 @@ class Employees extends Model
     public function position(){
         return $this->belongsTo(Positions::class);
     }
+    public function user(){
+        return $this->hasOne(User::class,'employee_id');
+    }
+
 }

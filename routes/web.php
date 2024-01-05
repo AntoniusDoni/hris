@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployeeScheduleController;
 use App\Http\Controllers\GeneralController;
+use App\Http\Controllers\LeavesController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
@@ -62,9 +64,18 @@ Route::middleware(['auth'])->group(function () {
     // employeeScheduler
     Route::get('/employee-scheduler', [EmployeeScheduleController::class, 'index'])->name('employee-scheduler.index');
     Route::get('/employee-scheduler/create', [EmployeeScheduleController::class, 'create'])->name('employee-scheduler.create');
-    Route::post('/employee-scheduler', [SchedulerController::class, 'store'])->name('employee-scheduler.store');
-    Route::put('/employee-scheduler/{scheduler}', [SchedulerController::class, 'update'])->name('employee-scheduler.update');
-    Route::delete('/employee-scheduler/{scheduler}', [SchedulerController::class, 'destroy'])->name('employee-scheduler.destroy');
+    Route::post('/employee-scheduler', [EmployeeScheduleController::class, 'store'])->name('employee-scheduler.store');
+    Route::get('/employee-scheduler/edit/{scheduler}', [EmployeeScheduleController::class, 'edit'])->name('employee-scheduler.edit');
+    Route::put('/employee-scheduler/{employeeScheduler}', [EmployeeScheduleController::class, 'update'])->name('employee-scheduler.update');
+    Route::delete('/employee-scheduler/{scheduler}', [EmployeeScheduleController::class, 'destroy'])->name('employee-scheduler.destroy');
+    // Attendances
+    Route::get('/attendances', [AttendanceController::class, 'index'])->name('attendance.index');
+    Route::post('/attendances', [AttendanceController::class, 'store'])->name('attendance.store');
+    Route::put('/attendances/{attendance}', [AttendanceController::class, 'update'])->name('attendance.update');
+    Route::delete('/attendances/{attendance}', [AttendanceController::class, 'destroy'])->name('attendance.destroy');
+    //Leaves
+    Route::get('/leaves', [LeavesController::class, 'index'])->name('leave.index');
+    Route::put('/leaves/{leave}', [LeavesController::class, 'update'])->name('leave.update');
 });
 
 Route::middleware('auth')->group(function () {

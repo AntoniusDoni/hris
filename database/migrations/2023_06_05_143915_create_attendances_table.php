@@ -15,8 +15,8 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->uuid('employee_id');
             $table->date('date_at');
-            $table->time('time_in');
-            $table->time('time_out');
+            $table->time('time_in')->nullable();
+            $table->time('time_out')->nullable();
             $table->tinyInteger('is_in')->nullable();
             $table->tinyInteger('is_out')->nullable();
             $table->string('lat')->nullable();

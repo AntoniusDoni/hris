@@ -120,15 +120,10 @@ export default function SelectionInput(props) {
 
     useEffect(() => {
         if (itemSelected !== null) {
-            // console.log(itemSelected)
             const item = showItems.find(item => item.id === itemSelected)
-
             if (item) {
                 setSelected(item.name)
                 setIsSelected(true)
-            }else{
-                setSelected('')
-                setIsSelected(false)
             }
             return
         }
@@ -210,7 +205,7 @@ export default function SelectionInput(props) {
                                         </div>
                                     ) : (
                                         <>
-
+                                          
                                             {showItems.map((item, index) => (
                                                 <div
                                                     key={index}

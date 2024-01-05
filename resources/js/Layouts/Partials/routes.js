@@ -20,7 +20,8 @@ import {
     HiOutlineCash,
     HiOutlineTable,
     HiDocument,
-    HiCalendar
+    HiCalendar,
+    HiOutlineLogin
 } from "react-icons/hi";
 
 export default [
@@ -31,6 +32,22 @@ export default [
         route: route("dashboard"),
         active: "dashboard",
         permission: "view-dashboard",
+    },
+    {
+        name: "Absensi",
+        show: true,
+        icon: HiCalendar,
+        route: route("attendance.index"),
+        active: "attendance",
+        permission: "view-attendance",
+    },
+    {
+        name: "Cuti",
+        show: true,
+        icon: HiOutlineLogin,
+        route: route("leave.index"),
+        active: "leave",
+        permission: "view-leave",
     },
     {
         name: "Master",
@@ -77,7 +94,7 @@ export default [
                 active: "employee-scheduler.*",
                 permission: "view-employee-scheduler",
             }
-        ] 
+        ]
     },
     {
         name: "User",

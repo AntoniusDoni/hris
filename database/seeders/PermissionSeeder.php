@@ -66,6 +66,11 @@ class PermissionSeeder extends Seeder
             ['id' => Str::ulid(), 'label' => 'Ubah Absensi', 'name' => 'update-attendance'],
             ['id' => Str::ulid(), 'label' => 'Lihat Absensi', 'name' => 'view-attendance'],
             ['id' => Str::ulid(), 'label' => 'Hapus Absensi', 'name' => 'delete-attendance'],
+
+            ['id' => Str::ulid(), 'label' => 'Tambah Cuti ', 'name' => 'create-leave'],
+            ['id' => Str::ulid(), 'label' => 'Ubah Cuti', 'name' => 'update-leave'],
+            ['id' => Str::ulid(), 'label' => 'Lihat Cuti', 'name' => 'view-leave'],
+            ['id' => Str::ulid(), 'label' => 'Hapus Cuti', 'name' => 'delete-leave'],
         ];
 
         foreach ($permissions as $permission) {
